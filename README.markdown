@@ -72,6 +72,7 @@ to the iframe, and write a JS callback:
 	<input name="param" value="test" /><button type="submit">Submit</button>
 </form>
 ```
+
 In JavaScript code:
 ```javascript
 function myCallback(data){
@@ -80,7 +81,8 @@ function myCallback(data){
 ```
 
 Finally
- 3. In the server method write the iframe response calling to the callback:
+3. In the server method write the iframe response calling to the callback:
+
 ```php
 $this->ajax->iframe($response_array, 'myCallback', TRUE);
 ```
