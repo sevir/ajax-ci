@@ -60,26 +60,26 @@ var myvariable = $.extend({JSON},myvariable)
 ## Cross-domain AJAX with iframe
 This library can use a simple technique for cross-domain ajax. This works with a simple steps:
 
-1. In your view call to the helper iframe_response, this produces an invisible iframe:
+ 1. In your view call to the helper iframe_response, this produces an invisible iframe:
 ```php
 <?=iframe_response('my_iframe_name') ?>
 ```
 
-2. Call to the server in JavaScript setting the src url of the iframe or targetting a form submitted
+ 2. Call to the server in JavaScript setting the src url of the iframe or targetting a form submitted
 to the iframe, and write a JS callback:
 ```html
 <form action="url" method="POST" target="my_iframe_name">
 	<input name="param" value="test" /><button type="submit">Submit</button>
 </form>
 ```
-
+In JavaScript code:
 ```javascript
 function myCallback(data){
 	
 }
 ```
 
-3. In the server method write the iframe response calling to the callback:
+ 3. In the server method write the iframe response calling to the callback:
 ```php
 $this->ajax->iframe($response_array, 'myCallback', TRUE);
 ```
