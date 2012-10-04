@@ -5,7 +5,7 @@ AJAX spark consists in one library for to simplify JSON responses and one helper
 This is a simple method in your controller returning an AJAX response:
 ```php
 function ajax(){
-	$this->load->spark('ajax/1.0');
+	$this->load->spark('ajax/<version>');
 	$this->load->library('ajax');
 
 	if ($this->ajax->is_ajax_request()){
