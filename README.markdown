@@ -72,6 +72,7 @@ to the iframe, and write a JS callback:
 	<input name="param" value="test" /><button type="submit">Submit</button>
 </form>
 ```
+
 ```javascript
 function myCallback(data){
 	
