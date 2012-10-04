@@ -1,0 +1,7 @@
+name: ajax
+
+version: 1.0
+
+compatibility: 1.7.2
+
+tags: ["ajax", "xml","cross-domain"]
