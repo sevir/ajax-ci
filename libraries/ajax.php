@@ -54,16 +54,16 @@ class Ajax{
 		
 		if ($as_script) {
 			if (!empty($assign_variable)) {
+				$this->CI->output->set_content_type('text/javascript');
 				if ($extend_var) {
 					$script = 'var ' . $assign_variable . ' = $.extend(' . $response . ',' . $assign_variable . ')';
 				} else {
 					$script = 'var ' . $assign_variable . ' = ' . $response;
 				}
 			} else {
+				$this->CI->output->set_content_type('application/'.$this->responseFormat);
 				$script = $response;
-			}
-
-			$this->CI->output->set_content_type('application/'.$this->responseFormat);
+			}			
 		} else {
 			$script = '<script language="javascript" type="text/javascript">'.
 						'try{ window.parent.window.' . $response . ' }catch(e){}'.
