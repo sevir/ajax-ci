@@ -62,13 +62,14 @@ class Ajax{
 			} else {
 				$script = $response;
 			}
+
+			$this->CI->output->set_content_type('application/'.$this->responseFormat);
 		} else {
 			$script = '<script language="javascript" type="text/javascript">'.
 						'try{ window.parent.window.' . $response . ' }catch(e){}'.
 					'</script>';
-		}
+		}		
 		
-		$this->CI->output->set_content_type('application/'.$this->responseFormat);
 		$this->CI->output->set_output($script);
 	}
 
