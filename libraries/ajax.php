@@ -40,7 +40,7 @@ class Ajax{
 	 * @param object $assign_variable [optional]
 	 * @return void
 	 */
-	function response($var = '', $responsefunction = '', $as_script = TRUE, $assign_variable = '', $extend_var = FALSE) {
+	function response($var = '', $responsefunction = '', $as_script = TRUE, $assign_variable = '', $extend_var = FALSE, $use_post_message = FALSE) {
 		if ($this->responseFormat == 'xml'){
 			$response = $this->xml_encode($var);
 		}else{
@@ -63,12 +63,12 @@ class Ajax{
 			} else {
 				$this->CI->output->set_content_type('application/'.$this->responseFormat);
 				$script = $response;
-			}			
+			}
+		} else if ($use_post_message) {
+			$script = '<script language="javascript" type="text/javascript"> try{ parent.postMessage('.json_encode($var).', "*"); }catch(e){console.log(e);} </script>';
 		} else {
-			$script = '<script language="javascript" type="text/javascript">'.
-						'try{ window.parent.window.' . $response . ' }catch(e){}'.
-					'</script>';
-		}		
+			$script = '<script language="javascript" type="text/javascript"> try{ window.parent.' . $response . '; }catch(e){ console.log(e); } </script>';
+		}
 		
 		$this->CI->output->set_output($script);
 	}
@@ -83,6 +83,15 @@ class Ajax{
 	function iframe($var = '', $responsefunction = 'iframe_response', $cross_domain = FALSE) {
 		$this->response($var, $responsefunction, $cross_domain);
 	}
+
+
+	/**
+	 * Alias of response, it returns the response as a message between iframe and its parent using an event with data
+	 */
+	function postMessage($var = '', $domains = '*') {
+		$this->response($var, 'iframe_response', FALSE, NULL, NULL, TRUE);
+	}
+
 
 	/**
 	* Check if it is an ajax request
